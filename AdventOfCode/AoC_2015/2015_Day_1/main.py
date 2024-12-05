@@ -1,5 +1,5 @@
 # This is Day 1
-with open('myenv/AdventOfCode/AoC_2015/2015_Day_1/data.txt', 'r') as file:
+with open('AoC/AdventOfCode/AdventOfCode/AoC_2015/2015_Day_1/data.txt', 'r') as file:
     data = file.read()
 
 def What_Floor():

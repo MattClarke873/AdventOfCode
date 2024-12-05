@@ -1,4 +1,4 @@
-source myenv/bin/activate
+source AoC/bin/activate
 
 
 tools location /Users/MattClarke/repo/mytools

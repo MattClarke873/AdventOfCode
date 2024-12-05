@@ -5,7 +5,7 @@ from mytools.colors import RED, RESET, CYAN
 from mytools import PrintList
 
 
-with open('myenv/AdventOfCode/AoC_2015/2015_Day_2/data.txt', 'r', encoding="utf-8") as file:
+with open('AoC/AdventOfCode/AdventOfCode/AoC_2015/2015_Day_2/data.txt', 'r', encoding="utf-8") as file:
     data = file.read()
 
 
