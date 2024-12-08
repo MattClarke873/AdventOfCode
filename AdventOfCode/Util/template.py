@@ -3,17 +3,13 @@ import time
 
 
 
-
-YEAR = 2015
-DAY = 7
-
-with open(f'/Users/MattClarke/repo/Advent of Code/AoC/AdventOfCode/AdventOfCode/AoC_2015/2015_Day_7/data.txt', 'r', encoding="utf-8") as file:
+YEAR = 0
+DAY = 0
+with open(f'AdventOfCode/AoC_{YEAR}/{YEAR}_Day_{DAY}/data.txt', 'r', encoding="utf-8") as file:
     data = file.read().strip()  # read file, and strip -- remove any white space
 
-with open(f'/Users/MattClarke/repo/Advent of Code/AoC/AdventOfCode/AdventOfCode/AoC_2015/2015_Day_7/test_data.txt', 'r', encoding="utf-8") as file:
+with open(f'AdventOfCode/AoC_{YEAR}/{YEAR}_Day_{DAY}/test_data.txt', 'r', encoding="utf-8") as file:
     test_data = file.read().strip()  # read file, and strip -- remove any white space    
-
-
 
 
 def time_it(func, *args, **kwargs):
@@ -36,16 +32,12 @@ def time_it(func, *args, **kwargs):
     return result
 
 
-def part1():
+
+def part1(data):
     """Function Solves problem one."""
-    print(data)
-
-# # Main execution with timing
-# if __name__ == "__main__":
-#     time_it(part1, data)
 
 
-def part2():
+def part2(data):
     """Function Solves problem two."""
 
 
