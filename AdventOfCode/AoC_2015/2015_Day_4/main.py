@@ -4,7 +4,7 @@ import hashlib as Hash
 
 YEAR = 2015
 DAY = 4
-with open(f'AoC/AdventOfCode/AdventOfCode/AoC_{YEAR}/{YEAR}_Day_{DAY}/data.txt', 'r', encoding="utf-8") as file:
+with open(f'AdventOfCode/AoC_{YEAR}/{YEAR}_Day_{DAY}/data.txt', 'r', encoding="utf-8") as file:
     data = file.read().strip()  # read file, and strip -- remove any white space
 
 
