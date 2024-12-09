@@ -4,6 +4,8 @@ import time
 
 YEAR = 2015
 DAY = 6
+complete_part1 = False
+complete_part2 = False
 
 with open(f'/Users/MattClarke/repo/Advent of Code/AoC/AdventOfCode/AdventOfCode/AoC_2015/2015_Day_6/data.txt', 'r', encoding="utf-8") as file:
     data = file.read().strip()  # read file, and strip -- remove any white space
@@ -30,6 +32,27 @@ def time_it(func, *args, **kwargs):
     elapsed_time = time.time() - start_time
     print(f"Execution time: {elapsed_time:.6f} seconds")
     return result
+
+def check_complete(answer1, answer2):
+    """
+    Check if both parts are complete based on their answers.
+    
+    Args:
+        answer1: The result from part1().
+        answer2: The result from part2().
+    
+    Updates:
+        Sets the global variables `complete_part1` and `complete_part2` to True if answers are non-zero.
+    """
+    global complete_part1, complete_part2  # Declare globals to modify them
+    if answer1 != 0:
+        complete_part1 = True
+
+    if answer2 != 0:
+        complete_part2 = True
+
+
+
 
 
 def parse_instructions(data):
@@ -148,11 +171,10 @@ The first half of this puzzle is complete! It provides one gold star: *
     instructions = parse_instructions(data)  # Parse the instructions
     count_ones = count_lights_on(grid, instructions)  # Apply instructions and count lights
     print(f"Number of lights on: {count_ones}")
+    return count_ones
 
 
-# Main execution with timing
-if __name__ == "__main__":
-    time_it(part1, data)
+
 
 
 def part2(data):
@@ -184,7 +206,13 @@ toggle 0,0 through 999,999 would increase the total brightness by 2000000."""
     instructions = parse_instructions(data)  # Parse the instructions
     bright_sum = sum_light_brightness(grid, instructions)
     print(f"Combined brightness of all lights: {bright_sum}") 
+    return bright_sum
 
 # Main execution with timing
 if __name__ == "__main__":
-    time_it(part2, data)
+   answer1 = time_it(part1, data)
+   answer2 = time_it(part2, data)
+
+
+
+check_complete(answer1, answer2)
