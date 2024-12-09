@@ -82,7 +82,7 @@ def count_lights_on(grid, instructions):
 
 
 def sum_light_brightness(grid, instructions):
-     """
+    """
     Apply a list of instructions to the grid and sum the brightness of all lights.
     MAX 2000000
     
@@ -96,8 +96,25 @@ def sum_light_brightness(grid, instructions):
     turn on -- increase brigtness by 1
     turn off  -- decrease brigtness by 1
     toggle -- increase brigtness by 2
-    
     """
+    for action, start_x, start_y, end_x, end_y in instructions:
+        for x in range(start_x, end_x + 1):
+            for y in range(start_y, end_y + 1):
+                if action == "turn on":
+                    grid[x][y] += 1
+                elif action == "turn off":
+                    if grid[x][y] == 0:
+                        grid[x][y] = 0
+                    else:
+                        grid[x][y] -= 1
+                elif action == "toggle":
+                    grid[x][y] += 2
+    # Count the number of lights that are on
+    total = 0
+    for row in grid:
+        total += sum(row)
+    return total
+
 
 
 def part1(data):
@@ -165,4 +182,9 @@ toggle 0,0 through 999,999 would increase the total brightness by 2000000."""
     grid_size = 1000
     grid = [[0 for _ in range(grid_size)] for _ in range(grid_size)]  # Initialize the grid
     instructions = parse_instructions(data)  # Parse the instructions
-    count_ones = count_lights_on(grid, instructions) 
+    bright_sum = sum_light_brightness(grid, instructions)
+    print(f"Combined brightness of all lights: {bright_sum}") 
+
+# Main execution with timing
+if __name__ == "__main__":
+    time_it(part2, data)
