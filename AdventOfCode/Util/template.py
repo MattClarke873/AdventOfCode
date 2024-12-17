@@ -41,3 +41,9 @@ def part2(data):
     """Function Solves problem two."""
 
 
+
+
+if __name__ == "__main__":
+    # Execute both parts
+    answer1 = time_it(part1, data)
+    answer2 = time_it(part2, data)
