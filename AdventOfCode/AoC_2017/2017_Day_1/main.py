@@ -43,7 +43,7 @@ def part1(data):
                 print(data[i], data[i + 1])
                 cap = cap + int(data[i])
     if data[0] == data[-1:]:
-         cap = cap + int(data[i])
+        cap = cap + int(data[i])
     print(f'sum of cap: {cap}')
 
 
