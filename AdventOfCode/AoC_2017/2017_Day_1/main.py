@@ -35,22 +35,32 @@ def time_it(func, *args, **kwargs):
 
 def part1(data):
     """Function Solves problem one."""
+    cap =0
+    size = len(data)
+    for i in range(size):
+        #print(data[i % size], data[(i+1) % size] )
 
-    cap = 0
-    for i, value in enumerate(data):
-        if i < len(data) - 1:  # Check that the next index exists
-            if data[i] == data[i + 1]:
-                print(data[i], data[i + 1])
-                cap = cap + int(data[i])
-    if data[0] == data[-1:]:
-        cap = cap + int(data[i])
+        if data[i % size] == data[(i+1) % size] :
+            #print(data[i % size], data[(i+1) % size])
+            cap = cap + int(data[i % size])
+
     print(f'sum of cap: {cap}')
 
 
 
 def part2(data):
     """Function Solves problem two."""
+    cap =0
+    size = len(data)
+    halfway = int((len(data)/2))
+    for i in range(size):
+        #print(data[i % size], data[(i+halfway) % size] )
 
+        if data[i % size] == data[(i+halfway) % size] :
+            #print(data[i % size], data[(i+halfway) % size])
+            cap = cap + int(data[i % size])
+
+    print(f'sum of cap (halfway): {cap}')
 
 
 
