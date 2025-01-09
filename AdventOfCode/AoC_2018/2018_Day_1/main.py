@@ -38,14 +38,35 @@ def part1(data):
     total = 0
     lines = data.splitlines()
     for i in range(len(lines)):
-        print(lines[i])
+        #print(lines[i])
         value = int(lines[i])
         total += value
     print(total)
 
 
 def part2(data):
-    """Function Solves problem two."""
+    """Function solves problem two."""
+    total = 0
+    seen_totals = set()
+    running_total = 0
+
+    # Parse the input into a list of integers
+    lines = list(map(int, data.splitlines()))
+
+    # Continuously cycle through the data
+    index = 0
+    while True:
+        value = lines[index % len(lines)]  # Cycle through the input data the % allows you to continuously cycle
+        running_total += value
+
+        if running_total in seen_totals:
+            print(f"First repeat: {running_total}")
+            return
+
+        seen_totals.add(running_total)
+        index += 1
+
+
 
 
 

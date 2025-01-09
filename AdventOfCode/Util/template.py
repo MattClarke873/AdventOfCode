@@ -3,8 +3,8 @@ import time
 
 
 
-YEAR = 0
-DAY = 0
+YEAR = 2018
+DAY = 12
 with open(f'AdventOfCode/AoC_{YEAR}/{YEAR}_Day_{DAY}/data.txt', 'r', encoding="utf-8") as file:
     data = file.read().strip()  # read file, and strip -- remove any white space
 
