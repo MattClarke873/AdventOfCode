@@ -37,23 +37,38 @@ def time_it(func, *args, **kwargs):
 def part1(data):
     """Function Solves problem one."""
     
+    two_count = 0
+    three_count = 0
     lines = data.splitlines()
-    size = len(lines)
     
-    for line in range(len(lines)):
-        matches = 0
-        answer = ''
-        print(f'----------{lines[line]}------------')  
-        for letter in range(len(lines[line])):
-            check = lines[line][letter]
-            #print(f'checking == {check}')
-            for letterSec in range(len(lines[line])-1):
-                checksum = lines [line][letterSec+1]
-                if check == checksum and letterSec+1 != letter:
-                    answer = check
-                    matches +=1
-        print(answer)
-        print(f'matches for the word = {matches}')
+    for line in lines:
+        two = False
+        three = False
+        print(f'----------{line}------------')
+        char_counts = {}
+        
+        # Count each character in the line
+        for char in line:
+            char_counts[char] = char_counts.get(char, 0) + 1
+        
+        # Print the counts
+        for char, count in char_counts.items():
+            if count == 2:
+                print(f"'{char}': {count}")
+                two = True    
+            if count == 3:
+                print(f"'{char}': {count}")
+                three = True
+            
+        if two:
+            two_count +=1 
+        if three:
+            three_count +=1 
+              
+    print(f'2 = {two_count}')
+    print(f'3 = {three_count}')
+    print(f'Answer = {two_count*three_count}')
+    
 
 
 
@@ -65,5 +80,5 @@ def part2(data):
 
 if __name__ == "__main__":
     # Execute both parts
-    answer1 = time_it(part1, test_data)
+    answer1 = time_it(part1, data)
     answer2 = time_it(part2, data)
