@@ -3,13 +3,14 @@ import time
 
 
 
-YEAR = 2018
-DAY = 12
-with open(f'AdventOfCode/AoC_{YEAR}/{YEAR}_Day_{DAY}/data.txt', 'r', encoding="utf-8") as file:
+YEAR = 0
+DAY = 0
+with open(f'/Users/MattClarke/repo/Advent of Code/AoC/AdventOfCode/AdventOfCode/AoC_{YEAR}/{YEAR}_Day_{DAY}/data.txt', 'r', encoding="utf-8") as file:
     data = file.read().strip()  # read file, and strip -- remove any white space
 
-with open(f'AdventOfCode/AoC_{YEAR}/{YEAR}_Day_{DAY}/test_data.txt', 'r', encoding="utf-8") as file:
+with open(f'/Users/MattClarke/repo/Advent of Code/AoC/AdventOfCode/AdventOfCode/AoC_{YEAR}/{YEAR}_Day_{DAY}/test_data.txt', 'r', encoding="utf-8") as file:
     test_data = file.read().strip()  # read file, and strip -- remove any white space    
+
 
 
 def time_it(func, *args, **kwargs):
