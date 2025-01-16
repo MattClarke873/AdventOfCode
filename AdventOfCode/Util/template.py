@@ -1,7 +1,8 @@
 ''' This is Day *** '''
 import time 
 
-
+RED = '\033[31m'
+RESET = '\033[0m'
 
 YEAR = 0
 DAY = 0
