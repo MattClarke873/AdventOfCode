@@ -1,18 +1,24 @@
-''' This is Day *** '''
-import time 
+import time
 
+# Terminal color codes
 RED = '\033[31m'
 RESET = '\033[0m'
 
+# Constants for the year and day (customize these as needed)
 YEAR = 0
 DAY = 0
-with open(f'/Users/MattClarke/repo/Advent of Code/AoC/AdventOfCode/AdventOfCode/AoC_{YEAR}/{YEAR}_Day_{DAY}/data.txt', 'r', encoding="utf-8") as file:
-    data = file.read().strip()  # read file, and strip -- remove any white space
 
-with open(f'/Users/MattClarke/repo/Advent of Code/AoC/AdventOfCode/AdventOfCode/AoC_{YEAR}/{YEAR}_Day_{DAY}/test_data.txt', 'r', encoding="utf-8") as file:
-    test_data = file.read().strip()  # read file, and strip -- remove any white space    
+# File paths
+data_file = f'/Users/MattClarke/repo/Advent of Code/AoC/AdventOfCode/AdventOfCode/AoC_{YEAR}/{YEAR}_Day_{DAY}/data.txt'
+test_data_file = f'/Users/MattClarke/repo/Advent of Code/AoC/AdventOfCode/AdventOfCode/AoC_{YEAR}/{YEAR}_Day_{DAY}/test_data.txt'
 
+# Read the main data file
+with open(data_file, 'r', encoding="utf-8") as file:
+    data = file.read().strip()  # Read and strip whitespace
 
+# Read the test data file
+with open(test_data_file, 'r', encoding="utf-8") as file:
+    test_data = file.read().strip()  # Read and strip whitespace
 
 def time_it(func, *args, **kwargs):
     """
@@ -33,17 +39,13 @@ def time_it(func, *args, **kwargs):
     print(f"Execution time: {elapsed_time:.6f} seconds")
     return result
 
-
-
 def part1(data):
-    """Function Solves problem one."""
-
+    """Solve problem one."""
+    print(data)
 
 def part2(data):
-    """Function Solves problem two."""
-
-
-
+    """Solve problem two."""
+    pass  # Add the logic for part 2 here
 
 if __name__ == "__main__":
     # Execute both parts
