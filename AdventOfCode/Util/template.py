@@ -1,13 +1,19 @@
+import os
 import time
 
 # Terminal color codes
 RED = '\033[31m'
 RESET = '\033[0m'
 
-# Constants for the year and day (customize these as needed)
-YEAR = 0
-DAY = 0
-
+# Get the absolute path of the current script
+script_path = os.path.abspath(__file__)
+# Get the folder where the script is saved
+script_folder = os.path.dirname(script_path)
+# Extract just the last folder name
+last_folder = os.path.basename(script_folder)
+# Extract year and day
+YEAR = int(last_folder.split('_')[0])  # Extract the part before the first '_'
+DAY = int(last_folder.split('_')[-1])  # Extract the part after the last '_'
 # File paths
 data_file = f'/Users/MattClarke/repo/Advent of Code/AoC/AdventOfCode/AdventOfCode/AoC_{YEAR}/{YEAR}_Day_{DAY}/data.txt'
 test_data_file = f'/Users/MattClarke/repo/Advent of Code/AoC/AdventOfCode/AdventOfCode/AoC_{YEAR}/{YEAR}_Day_{DAY}/test_data.txt'
