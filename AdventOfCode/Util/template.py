@@ -5,11 +5,24 @@ import time
 RED = '\033[31m'
 RESET = '\033[0m'
 
+
+
 # Get the absolute path of the current script
 script_path = os.path.abspath(__file__)
 # Get the folder where the script is saved
 script_folder = os.path.dirname(script_path)
 # Extract just the last folder name
+
+file_path = os.path.join(script_folder, 'test_data.txt')
+
+# Check if the file exists
+if not os.path.isfile(file_path):
+    # Create the file if it doesn't exist
+    with open(file_path, 'w') as file:
+        file.write('')
+
+
+
 last_folder = os.path.basename(script_folder)
 # Extract year and day
 YEAR = int(last_folder.split('_')[0])  # Extract the part before the first '_'

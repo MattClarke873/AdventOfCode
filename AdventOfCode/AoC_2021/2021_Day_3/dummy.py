@@ -1,9 +1,3 @@
-# Terminal color codes
-RED = '\033[31m'
-RESET = '\033[0m'
-
-
-
 import os
 import time
 from collections import Counter
@@ -123,19 +117,19 @@ def part2(data):
     
     
     # Oxygen default 1
-    #print(len(lines))
+    print(len(lines))
     for i in range(0,length):
         #print(f'Part 1 round {i+1} started')
         common_item = find_common(lines, i, 'oxygen')
         new_list = remove_items(lines, i,common_item)
         lines = new_list
-       # print(len(new_list))
+        print(len(new_list))
     oxygen = int(new_list[0],2)
 
     # C02 default 1
     lines = data.splitlines()
     new_list = lines
-    #print(len(lines))
+    print(len(lines))
     i =0
     
     while len(new_list) >1 :
@@ -144,7 +138,7 @@ def part2(data):
         common_item = find_common(new_list, i, 'C02')
         new_list = remove_items(lines, i,common_item)
         lines = new_list
-        #print(len(new_list))
+        print(len(new_list))
         i += 1
     C02 = int(new_list[0],2)
     print(f'oxygen * C02 = {oxygen * C02}')
