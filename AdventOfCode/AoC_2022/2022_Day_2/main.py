@@ -58,16 +58,8 @@ def time_it(func, *args, **kwargs):
     print(f"Execution time: {elapsed_time:.6f} seconds")
     return result
 
-def part1(data):
-    """Solve problem one."""
-    hands = data.splitlines()
-    pick_score = 0
-    pick_score_list = []
-    result_score = 0
-    result_score_list = [] 
-    for hand in hands:
 
-        
+def real_hands(hand):
         if hand[0] == "A":
             them = "ROCK"
         if hand[0] == "B":
@@ -84,14 +76,67 @@ def part1(data):
         if hand[2] == "Z":
             me = "SCISSORS"
             pick_score = 3
+        return them, me, pick_score
         
+    #X means you need to lose, 
+    # Y means you need to end the round in a draw, and 
+    # Z means you need to win.
+def fixed_hands(hand):
+        if hand[0] == "A":
+            them = "ROCK"
+        if hand[0] == "B":
+            them = "PAPER"
+        if hand[0] == "C":
+            them = "SCISSORS"
+
+        if hand[2] == "X":
+            result = "LOSE"
+            result_score = 0
+        if hand[2] == "Y":
+            result = "DRAW"
+            result_score = 3
+        if hand[2] == "Z":
+            result = "WIN"
+            result_score = 6
+        return them, result , result_score
+
+def losing_hand(result, them):
+        #X means you need to lose, 
+        # Y means you need to end the round in a draw, and 
+        # Z means you need to win.
+    
+        #   WIN
+        if result == "WIN":
+            if them == "ROCK"    : me = "PAPER"
+            if them == "PAPER"   : me = "SCISSORS"
+            if them == "SCISSORS": me ="ROCK"
+              
+        #   LOSE
+        if result == "LOSE":
+            if them == "ROCK"    : me ="SCISSORS"
+            if them == "PAPER"   : me = "ROCK"
+            if them == "SCISSORS": me = "PAPER"
+        # DRAW
+        elif result == 'DRAW':
+            me = them
+
+        return me
 
 
+def part1(data):
+    """Solve problem one."""
+    hands = data.splitlines()
+    pick_score = 0
+    pick_score_list = []
+    result_score = 0
+    result_score_list = [] 
+    for hand in hands:
+        them, me, pick_score = real_hands(hand)
         #   I WIN
         if (them == "ROCK" and me == "PAPER") or (them == "PAPER" and me == "SCISSORS") or (them == "SCISSORS" and me == "ROCK"):
             result_score = 6
             result = "win"
-            print(them, me)
+            
         #   THEY WIN
         if (them == "ROCK" and me == "SCISSORS") or (them == "PAPER" and me == "ROCK") or (them == "SCISSORS" and me == "PAPER"):
             result_score = 0
@@ -103,17 +148,34 @@ def part1(data):
         
 
 
-        print(f'{them:>10} - {me:<10} : you {result:<4}:{result_score} running score:{pick_score:<10} total = {result_score + pick_score}')
+        #print(f'{them:>10} - {me:<10} : you {result:<4}:{result_score} running score:{pick_score:<10} total = {result_score + pick_score}')
         pick_score_list.append(pick_score)
         result_score_list.append(result_score)
-    print(sum(pick_score_list))
-    print(sum(result_score_list))
-    print(sum(result_score_list) + sum(pick_score_list))
+    print(f'Hand score + results = {sum(result_score_list) + sum(pick_score_list)}')
 
 
 def part2(data):
     """Solve problem two."""
-    pass  # Add the logic for part 2 here
+    hands = data.splitlines()
+    pick_score = 0
+    pick_score_list = []
+    result_score = 0
+    result_score_list = [] 
+    for hand in hands:
+        them, result , result_score = fixed_hands(hand)
+
+        me = losing_hand(result, them)
+
+        if me == "ROCK": pick_score = 1
+        if me == "PAPER": pick_score = 2
+        if me == "SCISSORS": pick_score = 3
+        
+
+
+        print(f'{them:>10} - {me:<10} : you {result:<4}:{result_score} running score:{pick_score:<10} total = {result_score + pick_score}')
+        pick_score_list.append(pick_score)
+        result_score_list.append(result_score)
+    print(f'Hand score + results = {sum(result_score_list) + sum(pick_score_list)}')
 
 if __name__ == "__main__":
     # Execute both parts
