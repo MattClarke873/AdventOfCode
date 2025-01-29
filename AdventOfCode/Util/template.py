@@ -2,8 +2,10 @@ import os
 import time
 
 # Terminal color codes
-RED = '\033[31m'
-RESET = '\033[0m'
+RED = '\033[31m'     # Red
+RED_BG = '\033[41m'  # Red background
+INVERSE = '\033[7m'  # Inverse mode
+RESET = '\033[0m'    # Reset to default
 
 
 

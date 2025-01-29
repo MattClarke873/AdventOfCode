@@ -106,21 +106,36 @@ def split_stacks(stacks:list):
 
 
 
-def run_instruction(number_of_boxes:int, start:int, end:int, stacks:list):
+
+
+def run_instruction_9000(number_of_boxes:int, start:int, end:int, stacks:list):
     
     #removal
-    pp.pprint(stacks)
+    
     for i in range(0,number_of_boxes):
         box = stacks[start-1].pop(0)
+        print(f'remove {box} from stack {start}')
+        stacks[end-1].insert(0, box)
+        print(f'add {box} added to {end}')
     print('')
     
-    #all
-    for i in range(number_of_boxes,0,-1):
-        stacks[end-1].insert(0, box)
-    pp.pprint(stacks)
-        
-
     return stacks
+
+def run_instruction_9001(number_of_boxes:int, start:int, end:int, stacks:list):
+    
+    #removal
+    
+    for i in range(0,number_of_boxes):
+        box = stacks[start-1].pop(0)
+        print(f'remove {box} from stack {start}')
+        stacks[end-1].insert(0+i, box)
+        print(f'add {box} added to {end}')
+    print('')
+    
+    return stacks
+    
+    
+
      
 
 def part1(data):
@@ -133,10 +148,13 @@ def part1(data):
 
     for instruction in insturctions:
         number_of_boxes, start, end = split_instructions(instruction)
-        stripped_data = run_instruction(number_of_boxes, start, end, stripped_data)
+        print(number_of_boxes, start, end)
+        updated_stripped_data = run_instruction_9000(number_of_boxes, start, end, stripped_data)
+        stripped_data = updated_stripped_data
 
-        
-
+    result = ''.join(stripped_data[i][0] for i in range(len(stripped_data)))
+    print(result)
+    
     
    
     
@@ -145,8 +163,19 @@ def part1(data):
 
     
 def part2(data):
-    """Solve problem two."""
-    pass  # Add the logic for part 2 here
+    storage, insturctions = split_data(data) #split the storage and instructions 
+    stacks = storage.splitlines() #split storage in to stacks 
+
+    stripped_data = split_stacks(stacks) #move stacks in to lists
+
+    for instruction in insturctions:
+        number_of_boxes, start, end = split_instructions(instruction)
+        print(number_of_boxes, start, end)
+        updated_stripped_data = run_instruction_9001(number_of_boxes, start, end, stripped_data)
+        stripped_data = updated_stripped_data
+
+    result = ''.join(stripped_data[i][0] for i in range(len(stripped_data)))
+    print(result)
 
 if __name__ == "__main__":
     # Execute both parts
