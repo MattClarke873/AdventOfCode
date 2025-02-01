@@ -142,9 +142,9 @@ def shiftCipher(string:str, steps:int):
     
         range_size = max_val - min_val + 1  # Calculate the size of the range
         new_value = ((ord(x) - min_val + steps) % range_size) + min_val
-        if new_value != 32:
+        if ord(x) != 32:
             new_string += chr(new_value)
-        elif new_value == 32:
+        if ord(x) == 32:
             new_string += " "
     return new_string
 
@@ -190,8 +190,9 @@ def part2(data):
         Sector_ID = (int(returnIDNum(line)))
 
 
-
-        print(shiftCipher(name[:-3], (Sector_ID)))
+        Part2_answer =  (shiftCipher(name[:-3], (Sector_ID)))
+        if "north" in Part2_answer:
+            print(Part2_answer, Sector_ID)
 
 if __name__ == "__main__":
     # Execute both parts
