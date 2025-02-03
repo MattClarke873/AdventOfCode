@@ -4,6 +4,7 @@ import time
 # Terminal color codes
 RED = '\033[31m'     # Red
 RED_BG = '\033[41m'  # Red background
+GREEN_BG = '\033[42m'
 INVERSE = '\033[7m'  # Inverse mode
 RESET = '\033[0m'    # Reset to default
 
