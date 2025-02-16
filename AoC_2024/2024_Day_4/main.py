@@ -8,39 +8,45 @@ GREEN_BG = '\033[42m'
 INVERSE = '\033[7m'  # Inverse mode
 RESET = '\033[0m'    # Reset to default
 
+import os
 
+def get_file_paths():
+    """
+    Retrieves the script's directory, extracts the year and day from its name,
+    ensures test_data.txt exists, and reads data from both files.
 
-# Get the absolute path of the current script
-script_path = os.path.abspath(__file__)
-# Get the folder where the script is saved
-script_folder = os.path.dirname(script_path)
-# Extract just the last folder name
+    Returns:
+        tuple: (YEAR, DAY, data_file, test_data_file, data, test_data)
+    """
+    # Get script directory
+    script_folder = os.path.dirname(os.path.abspath(__file__))
+    last_folder = os.path.basename(script_folder)
 
-file_path = os.path.join(script_folder, 'test_data.txt')
+    # Extract year and day dynamically from the folder name
+    YEAR = int(last_folder.split('_')[0])
+    DAY = int(last_folder.split('_')[-1])
 
-# Check if the file exists
-if not os.path.isfile(file_path):
-    # Create the file if it doesn't exist
-    with open(file_path, 'w') as file:
-        file.write('')
+    # File paths
+    data_file = os.path.join(script_folder, 'data.txt')
+    test_data_file = os.path.join(script_folder, 'test_data.txt')
 
+    # Ensure test_data.txt exists
+    if not os.path.isfile(test_data_file):
+        with open(test_data_file, 'w') as file:
+            file.write('')
 
+    # Read data files
+    with open(data_file, 'r', encoding="utf-8") as file:
+        data = file.read().strip()
+    
+    with open(test_data_file, 'r', encoding="utf-8") as file:
+        test_data = file.read().strip()
 
-last_folder = os.path.basename(script_folder)
-# Extract year and day
-YEAR = int(last_folder.split('_')[0])  # Extract the part before the first '_'
-DAY = int(last_folder.split('_')[-1])  # Extract the part after the last '_'
-# File paths
-data_file = f'/Users/MattClarke/repo/Advent of Code/AoC/AdventOfCode/AdventOfCode/AoC_{YEAR}/{YEAR}_Day_{DAY}/data.txt'
-test_data_file = f'/Users/MattClarke/repo/Advent of Code/AoC/AdventOfCode/AdventOfCode/AoC_{YEAR}/{YEAR}_Day_{DAY}/test_data.txt'
+    return YEAR, DAY, data_file, test_data_file, data, test_data
 
-# Read the main data file
-with open(data_file, 'r', encoding="utf-8") as file:
-    data = file.read().strip()  # Read and strip whitespace
+# Usage
+YEAR, DAY, data_file, test_data_file, data, test_data = get_file_paths()
 
-# Read the test data file
-with open(test_data_file, 'r', encoding="utf-8") as file:
-    test_data = file.read().strip()  # Read and strip whitespace
 
 def time_it(func, *args, **kwargs):
     """
@@ -61,13 +67,24 @@ def time_it(func, *args, **kwargs):
     print(f"Execution time: {elapsed_time:.6f} seconds")
     return result
 
+
+directions = (
+    (-1, 0),  # UP
+    (-1, 1),  # UP RIGHT
+    (0, 1),   # RIGHT
+    (1, 1),   # DOWN RIGHT
+    (1, 0),   # DOWN
+    (1, -1),  # DOWN LEFT
+    (0, -1),  # LEFT
+    (-1, -1)  # UP LEFT
+)
+
+
 def part1(data):
     """Solve problem one."""
     rows = data.splitlines()
     
-    for row in rows:
-        for char in row:
-            pass    
+        
 
 def part2(data):
     """Solve problem two."""
@@ -75,5 +92,5 @@ def part2(data):
 
 if __name__ == "__main__":
     # Execute both parts
-    answer1 = time_it(part1, test_data)
+    answer1 = time_it(part1, data)
     answer2 = time_it(part2, data)
