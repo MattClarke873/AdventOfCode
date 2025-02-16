@@ -2,9 +2,14 @@ import os
 import time
 import re
 
+
 # Terminal color codes
-RED = '\033[31m'
-RESET = '\033[0m'
+RED = '\033[31m'     # Red
+RED_BG = '\033[41m'  # Red background
+GREEN_BG = '\033[42m'
+INVERSE = '\033[7m'  # Inverse mode
+RESET = '\033[0m'    # Reset to default
+
 
 
 
@@ -61,10 +66,19 @@ def time_it(func, *args, **kwargs):
 
 def sort_data(data, limiter):
     return re.split(limiter, data)
-    return data.split(limiter)
+    
 
 def sep_draw_numbers(data):
     return data.split(',')
+
+
+
+def checkCard(call_numbers, card):
+    count = 0
+    for call in call_numbers:
+        if call in card:
+            count +=1
+    print(f'\n{count} numbers match')
 
 
 def part1(data):
@@ -74,24 +88,35 @@ def part1(data):
         do sum
         """
 
-    numbers = sort_data(data, '\n\n')           #Split all data on empty line return
-    call_numbers = (sort_data(numbers[0], ',')) #Separate all numbers in the call line 
-    bingo_cards = [card.split() for card in numbers[1:]]  # Process the remaining cards into 2D arrays
-    num_of_cards = (len(bingo_cards))
+    numbers = sort_data(data, '\n\n')  # Split all data on empty lines
+    call_numbers = list(map(int, sort_data(numbers[0], ',')))  # Convert to integers
+    bingo_cards = [[int(num) for num in card.split()] for card in numbers[1:]]  # Convert all card numbers to int
+    num_of_cards = len(bingo_cards)
     
+    for call in call_numbers:
+        print(call)
+        card_num = 0
+        
+        for card in bingo_cards:
+            for num in range(len(card) - 24):
+                print("___________________________________")
+                print(f"Card {card_num}")
+                print("___________________________________")
+                card_num += 1
+                count = 0
+                for row in range(5):
+                    string = ""
+                    for column in range(5):
+                        pick = column + row * 5
+                        if card[pick] == call:
+                            string += " " + f"{GREEN_BG}{card[pick]:<3}{RESET}"
+                            count +=1
+                        else:
+                            string += " " + f"{card[pick]:<3}"
 
-    for card in bingo_cards:
-        for num in range(len(card)-1):
-            print(type(card[num]))
-            print(f'{card[num]:<5}{card[num+1]:<5}{card[num+2]:<5}{card[num+3]:<5}{card[num+4]:<5}')
-            print(f'{card[num+5]:<5}{card[num+6]:<5}{card[num+7]:<5}{card[num+8]:<5}{card[num+9]:<5}')
-            print(f'{card[num+10]:<5}{card[num+11]:<5}{card[num+12]:<5}{card[num+13]:<5}{card[num+14]:<5}')
-            print(f'{card[num+15]:<5}{card[num+16]:<5}{card[num+17]:<5}{card[num+18]:<5}{card[num+19]:<5}')
-            print(f'{card[num+20]:<5}{card[num+21]:<5}{card[num+22]:<5}{card[num+23]:<5}{card[num+24]:<5}')
-            print('')
 
-
-
+                    print(string)
+                print(f"match count = {count}")
 
 
 
