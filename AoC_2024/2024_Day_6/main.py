@@ -108,33 +108,65 @@ def get_moving(start, grid):
     row, col = start
     direction = 'UP'
     
-    match direction:
-        case "UP":
-            # Use 'and' not '&', and check grid[row-1][col] not just (row-1)
-            if grid[row - 1][col] != "#" and row - 1 >= 0:
-                direction = "RIGHT"
-            print(f"we are moving {direction}.")
-        
-        case "RIGHT":
-            # Check grid[row][col+1], and use 'and' not '&'
-            if grid[row][col + 1] != "#" and col + 1 < len(grid[0]):
-                direction = "DOWN"
-            print(f"we are moving {direction}.")
-        
-        case "DOWN":
-            # Check grid[row+1][col], use 'and' not '&'
-            if grid[row + 1][col] != "#" and row + 1 < len(grid):
-                direction = "LEFT"
-            print(f"we are moving {direction}.")
-        
-        case "LEFT":
-            # Use '=' not '==', check grid[row][col-1], use 'and' not '&'
-            if grid[row][col - 1] != "#" and col - 1 >= 0:
-                direction = "UP"
-            print(f"we are moving {direction}.")
-        
-        case _:
-            print("Something's not right.")
+    while 0 <= row < len(grid) and 0 <= col < len(grid[0]):
+        match direction:
+            case "UP":
+                if row - 1 >= 0:
+                    if grid[row - 1][col] != "#":  
+                        row -= 1
+                        print(f"we are moving {direction} {[row],[col]}.")
+                    else:
+                        direction = "RIGHT"
+                        print(f'Turning {direction}')
+                else:
+                    print(f"I think we are at the end {[row],[col]} (Up)")
+                    print("out of range")
+                    break
+            
+            case "RIGHT":
+                if col + 1 < len(grid[0]):
+                    if grid[row][col + 1] != "#":
+                        col += 1
+                        print(f"we are moving {direction} {[row],[col]}.")
+                    else:
+                        print(f"I think we are at the end {[row],[col]} (Right)")
+                        direction = "DOWN"
+                else:
+                    print(f"I think we are at the end {[row],[col]} (Right)")
+                    print("out of range")
+                    break
+            
+            case "DOWN":
+                if row + 1 < len(grid):
+                    if grid[row + 1][col] != "#":
+                        row += 1
+                        print(f"we are moving {direction} {[row],[col]}.")
+                    else:
+                        print(f"I think we are at the end {[row],[col]} (Down)")
+                        direction = "LEFT"
+                else:
+                    print(f"I think we are at the end {[row],[col]} (Down)")
+                    print("out of range")
+                    break
+            
+            case "LEFT":
+                if col - 1 >= 0:
+                    if grid[row][col - 1] != "#":
+                        col -= 1
+                        print(f"we are moving {direction} {[row],[col]}.")
+                    else:
+                        print(f"I think we are at the end {[row],[col]} (left)")
+                        direction = "UP"
+                else:
+                    print(f"I think we are at the end {[row],[col]} (left)")
+                    print("out of range")
+                    break
+            
+            
+            case _:
+                print("Something's not right.")
+    else:
+        print("Starting position is outside the grid!")
 
 
 
@@ -146,7 +178,7 @@ def part1(data: str) -> Any:
     """Solve problem one."""
     grid = get_grid(data)
     start = find_start(grid)
-    print(type(grid))
+    get_moving(start, grid)
 
 
 def part2(data: str) -> Any:
