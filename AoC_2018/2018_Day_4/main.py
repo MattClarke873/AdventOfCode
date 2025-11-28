@@ -122,11 +122,8 @@ def part1(data):
                     else:
                         sleepiest_min_dict[guard_id2][mins] = 1  # Add new guard with sleep time
 
-                    
-    
-    
-        
-    
+
+
 
     # Sort the inner dictionaries by their values (1, 2, 3...)
     for guard_id, mins_dict in sleepiest_min_dict.items():
@@ -134,8 +131,8 @@ def part1(data):
         sorted_min_dict = dict(sorted(mins_dict.items(), key=lambda x: x[1], reverse=True))  # Reverse to have larger values first
         sleepiest_min_dict[guard_id] = sorted_min_dict
 
-    # Now my_dict is sorted based on the inner dictionary values
-    
+# Now my_dict is sorted based on the inner dictionary values
+
 
 
 
@@ -153,7 +150,6 @@ def part1(data):
 
         print(f'the answer is ---> {sleepiest_guard*int(minutes_str)}')
 
-        
 
 
     highest_value = -1
