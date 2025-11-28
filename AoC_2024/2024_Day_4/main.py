@@ -79,10 +79,38 @@ directions = (
     (-1, -1)  # UP LEFT
 )
 
+def can_move(word_search, x, y, direction):
+    can_move_x  = x + direction[1]*3
+    can_move_y  = y + direction[0]*3
+
+    if can_move_y < 0 or can_move_y >= len(word_search):
+        return False
+    if can_move_x < 0 or can_move_x >= len(word_search[0]):
+        return False
+
+    return True
+
+def is_xmas(word_search, x,y, direction):
+    if word_search[y + direction[0]*1][x + direction[1]*1] != "M":
+        return False
+    if word_search[y + direction[0]*2][x + direction[1]*2] != "A":
+        return False
+    if word_search[y + direction[0]*3][x + direction[1]*3] != "S":
+        return False
+    return True
 
 def part1(data):
     """Solve problem one."""
-    rows = data.splitlines()
+    word_search = data.splitlines()
+    count = 0
+    for row in range(len(word_search)):
+        for col in range(len(word_search[0])):
+            if word_search[col][row] == "X":
+                for direction in directions:
+                    if can_move(word_search,row,col,direction) and is_xmas(word_search, row,col, direction):
+                        count +=1
+    print(count)
+
     
         
 
